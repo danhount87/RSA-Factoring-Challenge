@@ -3,6 +3,8 @@ from sys import argv
 
 
 def factorize():
+    '''many numbers as possible into a
+    product of two smaller numbers.'''
     with open(argv[1]) as f:
         for number in f:
             num = int(number)
