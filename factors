@@ -1,27 +1,32 @@
 #!/usr/bin/python3
+"""Module that factorize as many numbers as possible
+ into a product of two smaller numbers."""
 from sys import argv
-from math import sqrt
 
 
-def factor():
-    '''Factorize as many numbers as possible
-    into a product of two smaller numbers.'''
-    with open(argv[1]) as f:
-        for line in f:
-            sam = int(line)
-            print("{:d}=".format(sam), end="")
-            if sam % 2 == 0:
-                print("{}*2".format(sam//2))
-                continue
-            sqn = int(sqrt(sam))
-            if sqn % 2 == 0:
-                sqn += 1
-            for i in range(3, sqn + 1, 2):
-                if sam % i == 0:
-                    print("{}*{}".format(i, sam//i))
-                    break
-            if sam % i != 0:
-                print("{}={}*1".format(sam, sam))
+def factorize(value):
+    i = 2
 
+    if value < 2:
+        return
+    print()
+    '''print(value, "")'''
+    while value % i:
+        i += 1
+    print("{:.0f}={:.0f}*{:.0f}".format(value, value / i, i))
+    '''print(value, "")'''
+    print()
 
-factor()
+if len(argv) != 2:
+    exit()
+
+try:
+    with open(argv[1]) as file:
+        line = file.readline()
+
+        while line != "":
+            value = int(line.split('\n')[0])
+            factorize(value)
+            line = file.readline()
+except:
+    pass
